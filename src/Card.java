@@ -69,9 +69,9 @@ public class Card {
 	 *         false otherwise.
 	 */
 	public boolean matches(Card otherCard) {
-		if (! suit.equals(otherCard.suit())) return false;
-		if (! rank.equals(otherCard.rank())) return false;
-		if (! pointValue == otherCard.pointValue()) return false;
+		if (! (suit.equals(otherCard.suit()))) return false;
+		if (! (rank.equals(otherCard.rank()))) return false;
+		if (! (pointValue == otherCard.pointValue())) return false;
 		return true;
 	}
 
