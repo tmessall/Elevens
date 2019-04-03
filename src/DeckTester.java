@@ -55,14 +55,14 @@ public class DeckTester {
 		String[] fullDeckRanks = {"ace", "king", "queen", "jack", "10", "9", "8", "7", "6", "5", "4", "3", "2"};
 		String[] fullDeckSuits = {"hearts", "diamonds", "spades", "clubs"};
 		int[] fullDeckValues = {14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
-		Deck fullDeck = new Deck(fullDeckRanks, fullDeckSuits, fullDeckValues);
-		System.out.println(fullDeck.toString());
-		fullDeck.shuffle();
-		System.out.println(fullDeck.toString());
-		fullDeck.shuffle();
-		System.out.println(fullDeck.toString());
-		fullDeck.shuffle();
-		System.out.println(fullDeck.toString());
-
+		Deck deckOne = new Deck(fullDeckRanks, fullDeckSuits, fullDeckValues);
+		Deck deckTwo = new Deck(fullDeckRanks, fullDeckSuits, fullDeckValues);
+		int cardsInSame = 0;
+		while (! deckOne.isEmpty()) {
+			Card cardOne = deckOne.deal();
+			Card cardTwo = deckTwo.deal();
+			if (cardOne.matches(cardTwo)) cardsInSame++;
+		}
+		System.out.println(cardsInSame);
 	}
 }
