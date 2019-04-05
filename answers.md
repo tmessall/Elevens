@@ -6,6 +6,4 @@
 
 2. Yes, otherwise you would have to remove two cards and that would leave one on the board that could never be removed
 
-3. It is best to choose pairs before triplets, because it would be easiest to try to leave a triplet on the table for the last three cards.
-
-4. 
+3. It does not matter when more than one play is possible, because all matches have to be made at some point.
