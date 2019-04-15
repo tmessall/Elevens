@@ -56,7 +56,7 @@ public class ThirteensBoard extends Board {
 		if (selectedCards.size() == 2) {
 			return containsPairSum13(selectedCards);
 		} else if (selectedCards.size() == 3) {
-			return containK(selectedCards);
+			return containsK(selectedCards);
 		} else {
 			return false;
 		}
