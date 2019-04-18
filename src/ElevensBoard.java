@@ -51,7 +51,7 @@ public class ElevensBoard extends Board {
 		if (selectedCards.size() == 2) {
 			return findPairSum11(cardIndexes()).size() != 0;
 		} else if (selectedCards.size() == 3) {
-			return findJQK(cardIndexes()).size() == 3;
+			return findJQK(cardIndexes()).size() != 0;
 		} else {
 			return false;
 		}
@@ -69,7 +69,9 @@ public class ElevensBoard extends Board {
 	public boolean anotherPlayIsPossible() {
 		/* *** TO BE MODIFIED IN ACTIVITY 11 *** */
 		List<Integer> cIndexes = cardIndexes();
-		return findPairSum11(cIndexes).size() != 0 || findJQK(cIndexes).size() == 3;
+		if (findPairSum11(cIndexes).size() > 0) return true;
+		if (findJQK(cIndexes).size() > 0) return true;
+		return false;
 	}
 
 	/**
@@ -90,7 +92,6 @@ public class ElevensBoard extends Board {
 				if (cardAt(k1).pointValue() + cardAt(k2).pointValue() == 11) {
 					pairIndexes.add(sk1);
 					pairIndexes.add(sk2);
-					return pairIndexes;
 				}
 			}
 		}
@@ -111,24 +112,32 @@ public class ElevensBoard extends Board {
 		boolean foundJ = false;
 		boolean foundQ = false;
 		boolean foundK = false;
+		int jackSpot = -1;
+		int queenSpot = -1;
+		int kingSpot = -1;
 		for (Integer kObj : selectedCards) {
 			int k = kObj.intValue();
 			if (cardAt(k).rank().equals("jack")) {
 				if (! foundJ) {
-					jqkIndexes.add(kObj);
+					jackSpot = k;
 					foundJ = true;
 				}
 			} else if (cardAt(k).rank().equals("queen")) {
 				if (! foundQ) {
-					jqkIndexes.add(kObj);
+					queenSpot = k;
 					foundQ = true;
 				}
 			} else if (cardAt(k).rank().equals("king")) {
 				if (! foundK) {
-					jqkIndexes.add(kObj);
+					kingSpot = k;
 					foundK = true;
-				}			}
+				}			
+			}
 		}
+		if (jackSpot == -1 || queenSpot == -1 || kingSpot == -1) return jqkIndexes;
+		jqkIndexes.add(jackSpot);
+		jqkIndexes.add(queenSpot);
+		jqkIndexes.add(kingSpot);
 		return jqkIndexes;
 	}
 
@@ -138,9 +147,7 @@ public class ElevensBoard extends Board {
 	 */
 	public boolean playIfPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
-		boolean played11 = playPairSum11IfPossible();
-		boolean playedJQK = playJQKIfPossible();
-		return played11 || playedJQK;
+		return playPairSum11IfPossible() || playJQKIfPossible();
 	}
 
 	/**
@@ -151,10 +158,13 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean playPairSum11IfPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
+		boolean played = false;
 		List<Integer> pairIndexes = findPairSum11(cardIndexes());
-		if (pairIndexes.size() == 0) return false;
-		replaceSelectedCards(pairIndexes);
-		return true;
+		if (pairIndexes.size() > 0) {
+			replaceSelectedCards(pairIndexes);
+			played = true;
+		}
+		return played;
 	}
 
 	/**
@@ -165,9 +175,12 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean playJQKIfPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
+		boolean played = false;
 		List<Integer> jqkIndexes = findJQK(cardIndexes());
-		if (jqkIndexes.size() != 3) return false;
-		replaceSelectedCards(jqkIndexes);
-		return true;
+		if (jqkIndexes.size() > 0) {
+			replaceSelectedCards(jqkIndexes);
+			played = true;
+		}
+		return played;
 	}
 }

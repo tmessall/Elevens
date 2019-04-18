@@ -7,12 +7,12 @@ public class ElevensSimulation {
 	/**
 	 * The number of games of Elevens to play.
 	 */
-	private static final int GAMES_TO_PLAY = 1;
+	private static final int GAMES_TO_PLAY = 10;
 
 	/**
 	 * Flag used to control debugging print statements.
 	 */
-	private static final boolean I_AM_DEBUGGING = true;
+	private static final boolean I_AM_DEBUGGING = false;
 
 
 	/**
@@ -33,8 +33,10 @@ public class ElevensSimulation {
 			}
 			if (board.gameIsWon()) {
 				wins++;
+				board.newGame();
+			} else {
+				board.newGame();
 			}
-			board.newGame();
 		}
 
 		double percentWon = (int)(1000.0 * wins / GAMES_TO_PLAY + 0.5) / 10.0;
