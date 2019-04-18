@@ -112,33 +112,28 @@ public class ElevensBoard extends Board {
 		boolean foundJ = false;
 		boolean foundQ = false;
 		boolean foundK = false;
-		int jackSpot = -1;
-		int queenSpot = -1;
-		int kingSpot = -1;
 		for (Integer kObj : selectedCards) {
 			int k = kObj.intValue();
 			if (cardAt(k).rank().equals("jack")) {
 				if (! foundJ) {
-					jackSpot = k;
+					jqkIndexes.add(k);
 					foundJ = true;
 				}
 			} else if (cardAt(k).rank().equals("queen")) {
 				if (! foundQ) {
-					queenSpot = k;
+					jqkIndexes.add(k);
 					foundQ = true;
 				}
 			} else if (cardAt(k).rank().equals("king")) {
 				if (! foundK) {
-					kingSpot = k;
+					jqkIndexes.add(k);
 					foundK = true;
 				}			
 			}
 		}
-		if (jackSpot == -1 || queenSpot == -1 || kingSpot == -1) return jqkIndexes;
-		jqkIndexes.add(jackSpot);
-		jqkIndexes.add(queenSpot);
-		jqkIndexes.add(kingSpot);
-		return jqkIndexes;
+		if (jqkIndexes.size() == 3) return jqkIndexes;
+		List<Integer> blank = new ArrayList<>();
+		return blank;
 	}
 
 	/**
